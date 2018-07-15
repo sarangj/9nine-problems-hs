@@ -56,12 +56,12 @@ isPalindrome l = l == myReverse l
 -- Problem 7: Transform a list, possibly holding lists as elements into a `flat' list by 
 -- replacing each list with its elements (recursively).
 --
-data NestedList a = Elem a | List [NestedList a] 
+data NestedListElement a = Elem a | List [NestedListElement a]
 
-flatten :: NestedList a -> [a]
-flatten (Elem x) = [x]
-flatten (List []) = []
-flatten (List (x:xs)) = flatten x ++ (flatten (List xs))
+flatten :: [NestedListElement a] -> [a]
+flatten [] = []
+flatten ((Elem x):xs) = x : flatten xs
+flatten ((List l):xs) = flatten l ++ flatten xs
 
 -- |
 -- Problem 8: If a list contains repeated elements they should be replaced with 
